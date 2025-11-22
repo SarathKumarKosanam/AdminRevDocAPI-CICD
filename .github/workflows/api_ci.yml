@@ -56,12 +56,12 @@ jobs:
     - name: Publish Test Results to GitHub
       # Using the stable v1.7.0 version of the action
       uses: dorny/test-reporter@v1.7.0 
-      if: always() 
+      if: always() # Ensures reports are published even if a test failed
       with:
         name: API TestNG Results
         path: target/surefire-reports/*.xml 
-        # CRITICAL FIX: Changed 'surefire' to 'maven-surefire' to match required action input
-        reporter: maven-surefire 
+        # FINAL FIX: Changed reporter value from 'maven-surefire' to 'surefire'
+        reporter: surefire 
         fail-on-error: true 
         
     # Step 5: Upload Test Reports as an Artifact
